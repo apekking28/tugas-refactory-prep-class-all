@@ -9,6 +9,17 @@ const getAllUser = async (req, res) => {
   }
 };
 
+const getdetailUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res
+      .status(200)
+      .json({ message: "Berhasil mendapatkan detail user", data: user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const addUser = async (req, res) => {
   try {
     const { firstName, lastName, address } = req.body;
@@ -74,4 +85,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { addUser, getAllUser, updateUser, deleteUser };
+module.exports = { addUser, getdetailUser, getAllUser, updateUser, deleteUser };
